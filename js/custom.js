@@ -28,17 +28,24 @@ const orders = [
             { type: "shirt", amount: 50.25 }]
     }
 ];
-orders.forEach(function(data){
+let totalAmount = 0;
+// global function 
+function getAmountByType(orderType){
+    orders.forEach(function(order) {
+        order.lines.forEach(function(line){
+            if(line.type === orderType){
+                console.log(line.amount);
+                totalAmount += line.amount;
+                console.log('totalAmount is', totalAmount);
+            }
+        });
+    });
     let mainDiv = document.createElement("div");
-    let Samount = document.createElement("p");
-    mainDiv.appendChild(Samount);
-    
-    if(data.lines[0]=="shirt"){
-        console.log(data);
-        return true;
-    }
-    
-    Samount.innerHTML = data.lines[0].amount;
+    let amount = document.createElement("p");
+    mainDiv.appendChild(amount);
     document.getElementById("mainSection").appendChild(mainDiv);
-    // console.log(data.lines[0].amount)
-});
+    amount.innerHTML = totalAmount;
+}
+
+getAmountByType("book");
+
